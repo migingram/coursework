@@ -6,8 +6,8 @@ public class coursework implements ActionListener
 { 
     JFrame f = new JFrame(); 					/** Creates a window to hold components*/
     JPanel p = new JPanel();  				        /** Creates a panel to place items in */
-    Icon Store1 = new ImageIcon(); 
-    Icon Store2 = new ImageIcon(); 
+    Icon Store1 = new ImageIcon();                              /** A variable to store and image */
+    Icon Store2 = new ImageIcon();                              /** A second variable to store an image */
     JButton[] B = new JButton[12]; 				/** Creates an array of buttons */
     ImageIcon[] Iarray = new ImageIcon[12];                     /** Creates an array of images */
    
@@ -21,10 +21,10 @@ public class coursework implements ActionListener
         p.setSize(448, 363); 
         p.setVisible(true);
         f.setContentPane(p);  
-        GridLayout grid = new GridLayout(3, 4);               /** Creates a grid layour for the buttons to be displayed */
+        GridLayout grid = new GridLayout(3,4);                /** Creates a grid layour for the buttons to be displayed */
         p.setLayout(grid); 
 
-        for(int counter = 0; counter<12; counter++)           /** A counter to create buttons with correct image */
+        for(int counter = 0; counter < 12; counter++)                /** A counter to create buttons with correct image */
         { 
             Iarray[counter] = new ImageIcon("bart"+counter+".jpg"); 
             B[counter] = new JButton(Iarray[counter]);
@@ -38,21 +38,25 @@ public class coursework implements ActionListener
      
      } 
    
-     public void actionPerformed(ActionEvent click)        /** An action event to take place when the button is clicked */
+     public void actionPerformed(ActionEvent click)           /** An action event to take place when the button is clicked */
      { 
-         for(int counter1 = 0; counter1<12; counter1++) 
+         for(int counter1 = 0; counter1 < 12; counter1++) 
          { 
-             if(B[counter1] == click.getSource()) 
+             if (B[counter1] == click.getSource()) 
              {  
-                 for(int counter2 =0; counter2<12; counter2++) 
+                 for(int counter2 = 0; counter2 < 12; counter2++) 
                  { 
-                     if(B[counter2].getIcon() == Iarray[0]) 
+                     if (B[counter2].getIcon() == Iarray[0]) 
                      { 
-                         Store1 = B[counter2].getIcon(); 
-                         Store2 = B[counter1].getIcon(); 
-        
-                         B[counter2].setIcon(Store2); 
-                         B[counter1].setIcon(Store1); 
+                         if (counter1 == counter2 + 1 || counter1 == counter2 - 1 || 
+                             counter1 == counter2 - 4 || counter1 == counter2 + 4)
+                         { 
+                             Store1 = B[counter2].getIcon();         /** Temporarily holds the grey tile image */
+                             Store2 = B[counter1].getIcon();         /** Temporarily holds the clicked tile image */
+       
+                             B[counter2].setIcon(Store2); 
+                             B[counter1].setIcon(Store1); 
+                         }
                      } 
                  } 
              } 

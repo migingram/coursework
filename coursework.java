@@ -1,55 +1,68 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.*; 
+import java.awt.*; 
 import java.awt.event.*;
-
-public class coursework implements ActionListener
-{
-   ImageIcon tempStore;
-   JButton[] b = new JButton[12];
-   ImageIcon[] img = new ImageIcon[12];
-
-   public coursework()
-   {
-      JFrame f = new JFrame();
-      f.setSize(443,363);
-      f.setTitle("Swingin' Simpsons"); 
-      f.setVisible(true);
-      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-      JPanel p = new JPanel();
-      f.add(p);
-      f.setContentPane(p);
-      p.setVisible(true);
-      GridLayout layout = new GridLayout(3,4,0,0);
-      p.setLayout(layout);
-
  
-      for (int counter = 0; counter < 12; counter++)
-      {
-         img[counter] = new ImageIcon("bart"+counter+".jpg");
-         b[counter] = new JButton(img[counter]);
-         b[counter].setSize(112,119);
-         p.add(b[counter]);
-         b[counter].setVisible(true);
-         p.updateUI();
-      }
-   }
+public class coursework implements ActionListener 
+{ 
+    JFrame f = new JFrame(); 					/** Creates a window to hold components*/
+    JPanel p = new JPanel();  				        /** Creates a panel to place items in */
+    Icon Store1 = new ImageIcon(); 
+    Icon Store2 = new ImageIcon(); 
+    JButton[] B = new JButton[12]; 				/** Creates an array of buttons */
+    ImageIcon[] Iarray = new ImageIcon[12];                     /** Creates an array of images */
+   
+    public coursework() 
+    { 
+        f.setTitle("Swingin' Simpsons");
+        f.setSize(448, 363); 
+        f.setVisible(true); 
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
-   public void actionPerformed(ActionEvent click)
-   {
-       for (int counter1 = 0; counter1 < 12; counter1++)
-       {
-           if(b[counter1] == click.getSource())
-           {
-               b[0].setIcon(img[counter1]);
- 	       b[counter1].setIcon(img[0]);
-      
-           }
-       }     
-   }
+        p.setSize(448, 363); 
+        p.setVisible(true);
+        f.setContentPane(p);  
+        GridLayout grid = new GridLayout(3, 4);               /** Creates a grid layour for the buttons to be displayed */
+        p.setLayout(grid); 
 
-   public static void main(String[] args)
-   {
-       coursework c = new coursework();
-   }
+        for(int counter = 0; counter<12; counter++)           /** A counter to create buttons with correct image */
+        { 
+            Iarray[counter] = new ImageIcon("bart"+counter+".jpg"); 
+            B[counter] = new JButton(Iarray[counter]);
+            B[counter].setSize(112,119); 
+            p.add(B[counter]); 
+            B[counter].setVisible(true); 
+            B[counter].addActionListener(this);               /** Adds an ActionListener to each button */   
+         } 
+    
+         p.updateUI();                                        /** Updates the display */ 
+     
+     } 
+   
+     public void actionPerformed(ActionEvent click)        /** An action event to take place when the button is clicked */
+     { 
+         for(int counter1 = 0; counter1<12; counter1++) 
+         { 
+             if(B[counter1] == click.getSource()) 
+             {  
+                 for(int counter2 =0; counter2<12; counter2++) 
+                 { 
+                     if(B[counter2].getIcon() == Iarray[0]) 
+                     { 
+                         Store1 = B[counter2].getIcon(); 
+                         Store2 = B[counter1].getIcon(); 
+        
+                         B[counter2].setIcon(Store2); 
+                         B[counter1].setIcon(Store1); 
+                     } 
+                 } 
+             } 
+         } 
+     }
+
+
+     public static void main(String[] arguments) 
+     { 
+         coursework C = new coursework();                   /** Runs the GUI */
+     } 
 }
+
